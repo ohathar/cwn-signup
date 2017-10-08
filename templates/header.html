@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{ url_for('static',filename='favicon.ico') }}">
+
+    <title>CodeWarz.Ninja Competition SIGNUP</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static',filename='css/jumbotron.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a href="/"><img height="75" alt="jolly roger" src="/static/img/ninjagrey.png" /></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">~/ <span class="sr-only">(current)</span></a>
+          </li>
+         <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="https://signup.codewarz.ninja" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">~/Events</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              {% for event in events %}
+              <a class="dropdown-item" href="/event/{{ event.get('id') }}/{{ event.get('name') }}">/{{ event.get('name') }}</a>
+              {% endfor %}
+
+            </div>
+          </li>
+          <li class="nav-item">
+            {% if not is_logged_in %}
+            <a class="nav-link" href="/login">~/login </a>
+            {% else %}
+            <a class="nav-link" href="/logout">~/logout </a>
+            {% endif %}
+          </li>
+        </ul>
+        <a href="https://codewarz.ninja">Back to CodeWarz.Ninja</a>
+      </div>
+    </nav>

@@ -1,0 +1,48 @@
+{% include 'header.html' %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h5 class="display-3"><code>print("Hello, World!")</code></h5>
+        <h6 class="text-center"><code>{{ event_info.get('name') }}</code></h6>
+        <p>{{ event_info.get('description_full')|safe }}</p>
+        <p>Sign up for the {{ event_info.get('name') }} Division <a href="/signup/{{ event_info.get('id') }}/{{ event_info.get('name') }}">Here</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <p>The following divisions are available for this event:</p>
+      <!-- Example row of columns -->
+{% for division in divisions %}
+  {% if loop.index0 % 2 == 0 %}
+      <div class="row">
+  {% endif %}
+        <div class="col-md-6">
+          <h2>{{ division.get('name') }}</h2>
+          <p>{{ division.get('description') }}</p>
+          <p>Contenders <a href="/contenders/{{ event_info.get('id') }}/{{ division.get('id') }}/{{ event_info.get('name') }}/{{ division.get('name') }}">Here</a></p>
+        </div>
+  {% if loop.index0 % 2 != 0 %}
+      </div>
+  {% endif %}
+{% endfor %}
+
+      <hr>
+    </div> <!-- /container -->
+     <footer class="footer">
+      <div class="container">
+        <p class="text-muted text-center">Powered By: <a href="https://codewarz.ninja/info#Curmudgeon">Curmudgeon</a></p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../static/js/jquery.min.js"><\/script>')</script>
+    <script src="{{ url_for('static',filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ url_for('static',filename='js/ie10-viewport-bug-workaround.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+{% include 'header.html' %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h5 class="display-3"><code>print("Hello, World!")</code></h5>
+        <h6 class="text-center">The <code>{{ div_info.get('name') }} Division</code></h6>
+        <p>{{ div_info.get('description') }}</p>
+        <p>Sign up for the {{ div_info.get('name') }} Division <a href="/signup/{{ div_info.get('id') }}/{{ div_info.get('name') }}">Here</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-6">
+          <h2>XX Nov 2017</h2>
+          <p>Brief description about teh event, location for on-site, remote allowed, yadda </p>
+          
+        </div>
+        <div class="col-md-6">
+          <h2>YY Nov 2017</h2>
+          <p>Yadda Yadda USMA description, cadets whoo! and so on and so forth</p>
+          
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+
+      </div>
+
+      <hr>
+    </div> <!-- /container -->
+     <footer class="footer">
+      <div class="container">
+        <p class="text-muted text-center">Powered By: <a href="https://codewarz.ninja/info#Curmudgeon">Curmudgeon</a></p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../static/js/jquery.min.js"><\/script>')</script>
+    <script src="{{ url_for('static',filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ url_for('static',filename='js/ie10-viewport-bug-workaround.js') }}"></script>
+  </body>
+</html>

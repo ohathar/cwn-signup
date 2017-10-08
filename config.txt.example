@@ -1,0 +1,25 @@
+################ EXAMPLE config.txt #################
+#                                                   #
+## please change these values to suit your install ##
+#                                                   #
+#####################################################
+[Main]
+# secret_key: to be used for flask app.secret_key. suggest setting to 'urandom' for deployment
+secret_key: totallyrandom
+
+[db]
+# dbtype: type of database in use, currently supported databases: mysql
+dbtype: mysql
+dbhost: probably_localhost
+dbname: mydatabasename
+dbuser: mydatabaseuser
+dbpasswd: mydatabasepassword
+
+[mail]
+mail_server: host.name.for.email
+mail_port: 1234
+mail_tls: False
+mail_ssl: True
+mail_username: bob@aol.com
+mail_password: shittypasswordhereinplaintextfortheworldtosee!!
+

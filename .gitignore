@@ -1,0 +1,12 @@
+config.txt
+app.sock
+__pycache__/
+*.py[cod]
+*$py.class
+pip-selfcheck.json
+pip-log.txt
+pip-delete-this-directory.txt
+*.save
+*.save.*
+*.swp
+*.swp.*
