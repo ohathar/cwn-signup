@@ -69,7 +69,7 @@ def flash_errors(form_info):
 def login_required(f):
 	@wraps(f)
 	def wrap(*args, **kwargs):
-		if 'logged_in' in session:
+		if 'admin' in session:
 			return f(*args, **kwargs)
 		else:
 			return redirect(url_for('login_route'))
@@ -180,6 +180,7 @@ def check_login(form):
 	if bcrypt.verify(password, res.get('password')):
 		session['id'] = res.get('id')
 		session['level'] = res.get('level')
+		session['admin'] = 1
 		return True
 	return False
 
@@ -211,7 +212,7 @@ def get_events():
 
 def get_event(event_id):
 	cur = g._database.cursor()
-	cur.execute('SELECT id, name, description_full, start, stop FROM events WHERE id = %s LIMIT 1', (event_id))
+	cur.execute('SELECT id, name, description_fp, description_full, start, stop FROM events WHERE id = %s LIMIT 1', (event_id))
 	res = cur.fetchone()
 	return res
 
@@ -288,27 +289,30 @@ def contenders_route(event_id,event_name,div_id,div_name):
 	contenders = get_contenders(event_id,div_id)
 	return render_template('contenders.html',events=events,event_info=event_info,contenders=contenders,div_info=div_info,is_logged_in=is_logged_in())
 
+@app.route('/admin')
+@login_required
+def admin_route():
+	events = get_events()
+	return render_template('admin.html',events=events,is_logged_in=is_logged_in())
 
-## this route can probably be removed ##
-@app.route('/info/<int:div_id>/<div_name>')
-def info_route(div_id,div_name):
-	divisions = get_divisions()
-	if not any(d.get('id') == div_id for d in divisions):
-		return 'i do not know about that division'
-	div_info = get_division(div_id)
-	return render_template('info.html',divisions=divisions,div_info=div_info,is_logged_in=is_logged_in())
-## end of probable removable route ##
+@app.route('/admin/event/<int:event_id>')
+@login_required
+def admin_event_route(event_id):
+	events = get_events()
+	event_info = get_event(event_id)
+	divisions = get_divisions(event_id)
+	return render_template('admin_events.html',events=events,event_info=event_info,divisions=divisions)
 
 @app.route('/login', methods=['GET','POST'])
 def login_route():
-	divisions = get_divisions()
+	events = get_events()
 	if request.method == 'POST':
 		if check_login(request.form):
 			flash('Logged in!', 'success')
 			return redirect(url_for('index_route'))
 		else:
 			flash("I don't know you",'danger')
-	return render_template('login.html',divisions=divisions,is_logged_in=is_logged_in())
+	return render_template('login.html',events=events,is_logged_in=is_logged_in())
 
 @app.route('/logout')
 def logout_route():
