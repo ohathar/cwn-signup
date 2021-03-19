@@ -11,7 +11,7 @@ Flask-Mail==0.9.1
 Flask-SeaSurf==0.2.2
 idna==2.6
 itsdangerous==0.24
-Jinja2==2.9.6
+Jinja2==2.11.3
 MarkupSafe==1.0
 passlib==1.7.1
 pycparser==2.18
